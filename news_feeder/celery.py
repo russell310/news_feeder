@@ -17,8 +17,7 @@ app.config_from_object(settings, namespace='CELERY')
 app.conf.beat_schedule = {
     'fetch_news_from_newsapi': {
         'task': 'update_news',
-        # 'schedule': crontab(minute='*/10'),
-        'schedule': 10,
+        'schedule': crontab(minute='*/10'),
         'options': {
             'expires': 8*60,
         },
