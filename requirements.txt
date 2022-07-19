@@ -1,0 +1,8 @@
+Django
+django-allauth
+django-crispy-forms
+django-debug-toolbar
+dj-database-url
+newsapi-python
+Pillow
+python-decouple
