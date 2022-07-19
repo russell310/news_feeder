@@ -27,3 +27,21 @@
         </div>
     </div>
 {% endblock %}
+
+
+{% block js %}
+    <script>
+        const socket = new WebSocket(
+            'ws://' + window.location.host + '/ws/' + 'news/'
+        );
+        socket.onopen = function (e) {
+            console.log("Connection Made");
+        }
+        socket.onclose = function (e) {
+            console.log('Connection Closed');
+        }
+        socket.onmessage = function (e) {
+            location.reload();
+        }
+    </script>
+{% endblock %}

@@ -51,6 +51,9 @@ INSTALLED_APPS = [
     'multiselectfield',
     'bulk_update_or_create',
     'django_tables2',
+    'django_celery_results',
+    'django_celery_beat',
+    'channels',
 
     # myapps
     'apps.user',
@@ -89,6 +92,7 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'news_feeder.wsgi.application'
+ASGI_APPLICATION = "news_feeder.asgi.application"
 
 
 # Database
@@ -178,6 +182,34 @@ MESSAGE_TAGS = {
 
 NEWS_API_KEY = config('NEWS_API_KEY')
 
+CACHES = {
+    "default": {
+        "BACKEND": "django_redis.cache.RedisCache",
+        "LOCATION": "redis://127.0.0.1:6379/1",
+        "OPTIONS": {
+            "CLIENT_CLASS": "django_redis.client.DefaultClient",
+        }
+    },
+}
+
+CELERY_BROKER_URL = 'redis://localhost:6379'
+CELERY_RESULT_BACKEND = 'django-db'
+CELERY_CACHE_BACKEND = 'django-cache'
+
+CELERY_ACCEPT_CONTENT = ['application/json']
+CELERY_RESULT_SERIALIZER = 'json'
+CELERY_TASK_SERIALIZER = 'json'
+CELERY_TIMEZONE = 'Asia/Dhaka'
+
+CELERY_BEAT_SCHEDULER = 'django_celery_beat.schedulers:DatabaseScheduler'
+CHANNEL_LAYERS = {
+    "default": {
+        "BACKEND": "channels_redis.core.RedisChannelLayer",
+        "CONFIG": {
+            "hosts": [("127.0.0.1", 6379)],
+        },
+    },
+}
 
 if DEBUG:
     LOGGING = {
