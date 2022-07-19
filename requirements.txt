@@ -1,7 +1,11 @@
 Django
 django-allauth
+django-bulk-update-or-create
+django-countries
 django-crispy-forms
 django-debug-toolbar
+django-multiselectfield
+django-tables2
 dj-database-url
 newsapi-python
 Pillow

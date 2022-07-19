@@ -48,6 +48,9 @@ INSTALLED_APPS = [
     'allauth.account',
     'allauth.socialaccount',
     'crispy_forms',
+    'multiselectfield',
+    'bulk_update_or_create',
+    'django_tables2',
 
     # myapps
     'apps.user',
@@ -144,6 +147,14 @@ hostname, _, ips = socket.gethostbyname_ex(socket.gethostname())
 INTERNAL_IPS = [ip[:-1] + '1' for ip in ips] + ['127.0.0.1', ]
 
 SITE_ID = 1
+
+ACCOUNT_FORMS = {
+    'signup': 'apps.user.forms.CustomSignupForm',
+    'login': 'apps.user.forms.CustomLoginForm',
+    'change_password': 'apps.user.forms.CustomChangePasswordForm',
+    'reset_password': 'apps.user.forms.CustomResetPasswordForm',
+    'reset_password_from_key': 'apps.user.forms.CustomResetPasswordKeyForm',
+}
 
 ACCOUNT_UNIQUE_EMAIL = False
 ACCOUNT_EMAIL_REQUIRED = False
